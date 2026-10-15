@@ -2,6 +2,7 @@
 #include <iostream> 
 #include<vector>
 #include "NPC.h"
+#include "Spell.h"
 using namespace std;
 
 class Wizard : virtual public NPC

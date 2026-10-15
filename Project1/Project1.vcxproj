@@ -142,6 +142,8 @@
     <ClCompile Include="Evil.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="Paladin.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="warrior.cpp" />
     <ClCompile Include="weapon.cpp" />
     <ClCompile Include="Wizard.cpp" />
