@@ -1,52 +1,68 @@
 #include "Warrior.h"
-#include "NPC.h"
+
 #include <iostream>
+#include <utility>
 
-using namespace std;
-
-Warrior :: Warrior()
-	
+Warrior::Warrior()
 {
-		damage = 20;
-		health = 30;
-		armor = 15;
-		this->name = name; //такой способ задания поля уместен только для сеттер
-		for (size_t i = 0; i < lvl; i++)
-		{
-			LvlUp();
-		}
-		//this->lvl = lvl; //this - указывает на конкретный экземпляр класса
-	}
-	void Warrior::Create()
-	{
-		cout << "Вы создали война\nЗадайте имя игрока\n";
-		cin >> name;
+    className = "Воин";
+    damage = 20;
+    health = 30;
+    armor = 15;
+}
 
-		GetInfo();
-		GetWeapon();
-	};
-	void Warrior::GetInfo()
-	{
-		NPC::GetInfo();
-		cout << "сила: " << strength << endl;
-	};
-	void Warrior::GetWeapon()
-	{
-		Weapon weapon;
-		weapon.damage = 1;
-		weapon.name = "кулаки";
-		weapons.push_back(weapon);
+Warrior::Warrior(std::string name, unsigned int targetLvl) : Warrior()
+{
+    this->name = std::move(name);
 
-		cout << name << " взял в руки оружие " << weapons[0].name << endl;
-		cout << " добавка к урону = " << weapons[0].damage << endl;
-	};
+    while (lvl < static_cast<short>(targetLvl))
+        LvlUp();
+}
 
-	void Warrior::Relaculate() {
-		NPC::Relaculate();
-		damage += strength / 10;
-		health += strength / 5;
-	}
-	Warrior::~Warrior() //деструктор (вызывается сам в момент высвобождения памяти экземпляра)
-	{
-		cout << name << " пал смертью храбрых" << endl;
-	}
+void Warrior::Create()
+{
+    std::cout << "Вы создали воина!\n";
+    std::cout << "Задайте имя игрока: ";
+    std::cin >> name;
+
+    if (weapons.empty())
+    {
+        Weapon weapon;
+        weapon.damage = 1;
+        weapon.name = "Кулаки";
+        weapons.push_back(weapon);
+    }
+
+    GetInfo();
+    GetWeapon();
+}
+
+void Warrior::GetInfo() const
+{
+    NPC::GetInfo();
+    std::cout << "Сила: " << strength << '\n';
+}
+
+void Warrior::GetWeapon() const
+{
+    if (weapons.empty())
+    {
+        std::cout << "Оружие отсутствует.\n";
+        return;
+    }
+
+    std::cout << name << " взял в руки оружие: " << weapons[0].name << '\n';
+    std::cout << "Добавка к урону: " << weapons[0].damage << '\n';
+}
+
+void Warrior::Relaculate()
+{
+    NPC::Relaculate();
+    damage += static_cast<unsigned int>(strength / 10);
+    health += static_cast<unsigned int>(strength / 5);
+}
+
+Warrior::~Warrior()
+{
+    std::cout << name << " пал смертью храбрых\n";
+}

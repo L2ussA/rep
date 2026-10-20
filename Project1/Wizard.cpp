@@ -1,51 +1,58 @@
-#include <iostream> 
-#include<vector>
 #include "Wizard.h"
-#include "Spell.h"
-using namespace std;
+
+#include <iostream>
 
 Wizard::Wizard()
-//конструктор вызывается в момент создания экземпляра
 {
-	//cout << "конструктор волшебник" << endl;
-	damage = 27;
-	health = 21;
-	armor = 10;
-	for (size_t i = 0; i < lvl; i++)
-	{
-		LvlUp();
-	}
-	//this->lvl = lvl; //this - указывает на конкретный экземпляр класса
+    className = "Волшебник";
+    damage = 27;
+    health = 21;
+    armor = 10;
 }
+
 void Wizard::Create()
 {
-	cout << "Вы создали волшебник\nЗадайте имя игрока\n";
-	cin >> name;
+    std::cout << "Вы создали волшебника!\n";
+    std::cout << "Задайте имя игрока: ";
+    std::cin >> name;
 
-	GetInfo();
-	LearnSpell();
-};
-void Wizard::GetInfo()
-{
-	NPC::GetInfo();
-	cout << "интеллект: " << intellect << endl;
-};
-void Wizard::LearnSpell()
-{
-	Spell spell;
-	spell.damage = 2;
-	spell.name = "вспышка";
-	spells.push_back(spell);
+    if (spells.empty())
+    {
+        Spell spell;
+        spell.damage = 2;
+        spell.name = "Вспышка";
+        spells.push_back(spell);
+    }
 
-	cout << name << " изучил заклинание " << spells[0].name << endl;
-	cout << " добавка к урону = " << spells[0].damage << endl;
-};
-
-void Wizard::Relaculate() {
-	NPC::Relaculate();
-	damage += intellect / 10;
+    GetInfo();
+    LearnSpell();
 }
+
+void Wizard::GetInfo() const
+{
+    NPC::GetInfo();
+    std::cout << "Интеллект: " << intellect << '\n';
+}
+
+void Wizard::LearnSpell() const
+{
+    if (spells.empty())
+    {
+        std::cout << "Заклинания отсутствуют.\n";
+        return;
+    }
+
+    std::cout << name << " изучил заклинание: " << spells[0].name << '\n';
+    std::cout << "Добавка к урону: " << spells[0].damage << '\n';
+}
+
+void Wizard::Relaculate()
+{
+    NPC::Relaculate();
+    damage += static_cast<unsigned int>(intellect / 10);
+}
+
 Wizard::~Wizard()
 {
-	cout << name << " испускает дух" << endl;
-};
+    std::cout << name << " испускает дух\n";
+}

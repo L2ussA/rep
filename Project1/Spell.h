@@ -1,10 +1,9 @@
 #pragma once
-#include <iostream> 
-#include<vector>
-using namespace std;
+
+#include <string>
 
 struct Spell
 {
-	string name{ "spell" };
-	unsigned int damage{ 1 };
+    std::string name{ "spell" };
+    unsigned int damage{ 1 };
 };

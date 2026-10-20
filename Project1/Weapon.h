@@ -1,11 +1,9 @@
 #pragma once
 
-#include <iostream> 
-#include<vector>
-using namespace std;
+#include <string>
 
 struct Weapon
 {
-	string name{ "weapon" };
-	unsigned int damage{ 1 };
+    std::string name{ "weapon" };
+    unsigned int damage{ 1 };
 };

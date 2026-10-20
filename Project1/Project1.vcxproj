@@ -139,6 +139,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CharacterFactory.cpp" />
     <ClCompile Include="Evil.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="NPC.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Wizard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CharacterFactory.h" />
     <ClInclude Include="Evil.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Paladin.h" />

@@ -1,17 +1,15 @@
 #pragma once
-#include <iostream> 
-#include<vector>
-using namespace std;
+
+#include "NPC.h"
+
+#include <memory>
 
 class Player
 {
 private:
-	unique_ptr<NPC> currentCharacter{ nullptr };
-	unique_ptr<NPC> informaton{ nullptr };
-public:
-	void Create(unique_ptr<NPC> character);
-	NPC* GetCharacter();
+    std::unique_ptr<NPC> currentCharacter{ nullptr };
 
-	void GetInfo(unique_ptr<NPC> info);
-	NPC* GetIN();
+public:
+    bool Create(short choice);
+    NPC* GetCharacter();
 };

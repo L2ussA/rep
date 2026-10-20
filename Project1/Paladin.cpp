@@ -1,33 +1,60 @@
-#include <iostream> 
-#include<vector>
 #include "Paladin.h"
-using namespace std;
+
+#include <iostream>
 
 Paladin::Paladin()
 {
-	intellect = 25;
-	strength = 19;
-	health = 25;
-	damage = 25;
-	Create();
+    className = "Паладин";
+    intellect = 25;
+    strength = 19;
+    health = 25;
+    damage = 25;
+    armor = 20;
 }
+
 void Paladin::Create()
 {
-	// реализуйте это в npc (храниетет название в каком то поле)
-	cout << "Вы создали Паладина\nЗадайте имя игрока\n";
-	cin >> name;
+    std::cout << "Вы создали паладина!\n";
+    std::cout << "Задайте имя игрока: ";
+    std::cin >> name;
 
-	GetInfo();
-	GetWeapon();
-	LearnSpell();
+    if (weapons.empty())
+    {
+        Weapon weapon;
+        weapon.damage = 5;
+        weapon.name = "Меч";
+        weapons.push_back(weapon);
+    }
 
-};
-void Paladin::GetInfo()
+    if (spells.empty())
+    {
+        Spell spell;
+        spell.damage = 2;
+        spell.name = "Вспышка";
+        spells.push_back(spell);
+    }
+
+    GetInfo();
+    GetWeapon();
+    LearnSpell();
+}
+
+void Paladin::GetInfo() const
 {
-	Warrior::GetInfo();
-	cout << "интеллект: " << intellect << endl;
-};
+    NPC::GetInfo();
+    std::cout << "Сила: " << strength << '\n';
+    std::cout << "Интеллект: " << intellect << '\n';
+}
+
+void Paladin::Relaculate()
+{
+    NPC::Relaculate();
+    damage += static_cast<unsigned int>(strength / 10);
+    health += static_cast<unsigned int>(strength / 5);
+    damage += static_cast<unsigned int>(intellect / 10);
+}
+
 Paladin::~Paladin()
 {
-	cout << "отправляется к праотцам " << endl;
+    std::cout << name << " отправляется к праотцам\n";
 }
