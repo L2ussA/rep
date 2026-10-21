@@ -27,6 +27,6 @@ int main()
 
     std::cout << "\nПроверка получения урона:\n";
     TakeDamage(player.GetCharacter(), 5);
-
+    
     return 0;
 }
