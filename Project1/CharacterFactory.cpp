@@ -1,20 +1,51 @@
 #include "CharacterFactory.h"
+#include <iostream>
 
-#include "Paladin.h"
-#include "Warrior.h"
-#include "Wizard.h"
+// Enum - type data, который состоит из набора именованных констант.
+// Его главная цель — сделать код более читаемым, понятным и безопасным, заменяя абстрактные числа понятными словами
 
-std::unique_ptr<NPC> CharacterFactory::CreateCharacter(short choice)
-{
-    switch (choice)
-    {
-    case 1:
-        return std::make_unique<Warrior>();
-    case 2:
-        return std::make_unique<Wizard>();
-    case 3:
-        return std::make_unique<Paladin>();
-    default:
-        return nullptr;
+// Документирование кода, Ограничение множества значений
+
+// Enum - Имена констант «экспортируются» в окружающую область видимости.
+// Автоматически и неявно приводится к целым числам (int).
+// Безопасность типов низкая
+
+// Enum class - Имена констант внутри перечисления.
+// Не приводится к int автоматически. Требуется явное приведение.
+// Безопасность типов высокая
+
+/*Магические числа — это непонятные цифры в коде (например, 1, 404).
+Замена их на именованные константы(enum) дает 3 плюса:
+• Читаемость : код Status::Active понятен сразу, а 1 — нет.
+• Легкость правки : значение меняется в одном месте, а не ищется по всему проекту.
+• Безопасность : компилятор не даст сделать опечатку в имени, в отличие от случайной цифры.*/
+
+// Пример по умолчанию:
+/*enum class Caracter {
+    Warrior, // 0
+    Wizard,  // 1
+    Paladin  // 2
+};*/
+
+// Пример с заданными числами:
+/*enum class Weapon {
+    Common = 200,
+    Rare = 400,
+    Legendary = 404
+};*/
+
+void CharacterFactory::printHeroSpecs(HeroType type) {
+    // Switch-case для обработки выбранного персонажа
+    switch (type) {
+    case HeroType::Warrior:
+        std::cout << "Особенности: Невероятное количество здоровья и брони.\n";
+        break;
+    case HeroType::Wizard:
+        std::cout << "Особенности: Огромный урон магией, но слабая защита.\n";
+        break;
+    case HeroType::Paladin:
+        std::cout << "Особенности: Баланс между защитой и исцеляющей магией.\n";
+        break;
     }
 }
+
