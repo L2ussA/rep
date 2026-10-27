@@ -74,8 +74,5 @@
     <ClInclude Include="CharacterFactory.h">
       <Filter>Исходные файлы\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Enums.h">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

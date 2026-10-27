@@ -1,7 +1,11 @@
-#include "Enums.h"
+#pragma once
 
-class CharacterFactory {
+#include "NPC.h"
+
+#include <memory>
+
+class CharacterFactory
+{
 public:
-    // Статический метод для вывода инфо о классе персонажа
-    static void printHeroSpecs(HeroType type);
+    static std::unique_ptr<NPC> CreateCharacter(short choice);
 };

@@ -1,5 +1,8 @@
 #include "CharacterFactory.h"
-#include <iostream>
+
+#include "Paladin.h"
+#include "Warrior.h"
+#include "Wizard.h"
 
 // Enum - type data, который состоит из набора именованных констант.
 // Его главная цель — сделать код более читаемым, понятным и безопасным, заменяя абстрактные числа понятными словами
@@ -34,18 +37,19 @@
     Legendary = 404
 };*/
 
-void CharacterFactory::printHeroSpecs(HeroType type) {
-    // Switch-case для обработки выбранного персонажа
-    switch (type) {
-    case HeroType::Warrior:
-        std::cout << "Особенности: Невероятное количество здоровья и брони.\n";
-        break;
-    case HeroType::Wizard:
-        std::cout << "Особенности: Огромный урон магией, но слабая защита.\n";
-        break;
-    case HeroType::Paladin:
-        std::cout << "Особенности: Баланс между защитой и исцеляющей магией.\n";
-        break;
+
+
+std::unique_ptr<NPC> CharacterFactory::CreateCharacter(short choice)
+{
+    switch (choice)
+    {
+    case 1:
+        return std::make_unique<Warrior>();
+    case 2:
+        return std::make_unique<Wizard>();
+    case 3:
+        return std::make_unique<Paladin>();
+    default:
+        return nullptr;
     }
 }
-
