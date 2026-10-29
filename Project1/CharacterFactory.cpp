@@ -23,33 +23,40 @@
 • Легкость правки : значение меняется в одном месте, а не ищется по всему проекту.
 • Безопасность : компилятор не даст сделать опечатку в имени, в отличие от случайной цифры.*/
 
-// Пример по умолчанию:
-/*enum class Caracter {
-    Warrior, // 0
-    Wizard,  // 1
-    Paladin  // 2
-};*/
-
-// Пример с заданными числами:
-/*enum class Weapon {
-    Common = 200,
-    Rare = 400,
-    Legendary = 404
-};*/
-
-
-
-std::unique_ptr<NPC> CharacterFactory::CreateCharacter(short choice)
+std::unique_ptr<NPC> CharacterFactory::CreateCharacter(CharacterType type)
 {
-    switch (choice)
+    switch (type)
     {
-    case 1:
+    case CharacterType::Warrior:
         return std::make_unique<Warrior>();
-    case 2:
+    case CharacterType::Wizard:
         return std::make_unique<Wizard>();
-    case 3:
+    case CharacterType::Paladin:
         return std::make_unique<Paladin>();
     default:
         return nullptr;
+    }
+}
+
+std::unique_ptr<NPC> CharacterFactory::CreateCharacter(short choice)
+{
+    // Допустимые значения: от Warrior (1) до Count (не включая)
+    if (choice < static_cast<short>(CharacterType::Warrior) ||
+        choice >= static_cast<short>(CharacterType::Count))
+    {
+        return nullptr;
+    }
+
+    return CreateCharacter(static_cast<CharacterType>(choice));
+}
+
+std::string_view CharacterFactory::GetName(CharacterType type)
+{
+    switch (type)
+    {
+    case CharacterType::Warrior: return "Воин";
+    case CharacterType::Wizard:  return "Волшебник";
+    case CharacterType::Paladin: return "Паладин";
+    default:                     return "?";
     }
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 
+#include "CharacterFactory.h"
 #include "Player.h"
 
 int main()
@@ -11,9 +12,14 @@ int main()
     Player player;
 
     std::cout << "Кем ты хочешь играть?\n";
-    std::cout << "1 - Воин\n";
-    std::cout << "2 - Волшебник\n";
-    std::cout << "3 - Паладин\n";
+
+    // Меню строится перебором enum: новый персонаж появится здесь сам
+    for (short i = static_cast<short>(CharacterType::Warrior);
+         i < static_cast<short>(CharacterType::Count); ++i)
+    {
+        std::cout << i << " - "
+                  << CharacterFactory::GetName(static_cast<CharacterType>(i)) << '\n';
+    }
 
     short choice = 0;
     std::cout << ">> ";

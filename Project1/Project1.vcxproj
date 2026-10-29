@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterFactory.h" />
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="Evil.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Paladin.h" />

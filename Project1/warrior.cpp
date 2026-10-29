@@ -27,10 +27,29 @@ void Warrior::Create()
 
     if (weapons.empty())
     {
-        Weapon weapon;
-        weapon.damage = 1;
-        weapon.name = "Кулаки";
-        weapons.push_back(weapon);
+        std::cout << "Выберите оружие:\n";
+
+        // Меню строится перебором enum: новое оружие появится здесь само
+        for (short i = static_cast<short>(WeaponType::Fists);
+             i < static_cast<short>(WeaponType::Count); ++i)
+        {
+            const WeaponType type = static_cast<WeaponType>(i);
+            std::cout << i << " - " << GetWeaponName(type)
+                      << " (урон +" << CreateWeapon(type).damage << ")\n";
+        }
+
+        short choice = 0;
+        std::cout << ">> ";
+        std::cin >> choice;
+
+        if (choice < static_cast<short>(WeaponType::Fists) ||
+            choice >= static_cast<short>(WeaponType::Count))
+        {
+            std::cout << "Такого оружия нет, берём кулаки.\n";
+            choice = static_cast<short>(WeaponType::Fists);
+        }
+
+        weapons.push_back(CreateWeapon(static_cast<WeaponType>(choice)));
     }
 
     GetInfo();
